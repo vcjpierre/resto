@@ -25,8 +25,6 @@ export default function Restaurant(props) {
   const [userLogged, setUserLogged] = useState(false);
   const toastRef = useRef();
 
-  navigation.setOptions({ title: name });
-
   firebase.auth().onAuthStateChanged((user) => {
     user ? setUserLogged(true) : setUserLogged(false);
   });
@@ -46,6 +44,7 @@ export default function Restaurant(props) {
   );
 
   useEffect(() => {
+    navigation.setOptions({ title: name });
     if (userLogged && restaurant) {
       db.collection("favorites")
         .where("idRestaurant", "==", restaurant.id)
